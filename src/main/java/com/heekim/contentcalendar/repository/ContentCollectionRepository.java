@@ -1,15 +1,22 @@
 package com.heekim.contentcalendar.repository;
 
-//versus-Later the data access repository name will be just ContentRepository
+
 
 import com.heekim.contentcalendar.model.Content;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
+
+//versus-Later the data access repository name will be just ContentRepository
 @Repository
 public class ContentCollectionRepository {
-    private final List<Content> content = new ArrayList<Content>();
+    private final List<Content> content = new ArrayList<>();
+
+    public ContentCollectionRepository(){
+
+    }
 
 
 
