@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
+//WE WANT TO CREATE ALL THE CRUD ABILITY HERE- create read update delete | filter | paging and sorting
+//gk:but seems we make it in repository first
 @RestController
 @RequestMapping("/api/content")
 
@@ -39,6 +42,10 @@ public class ContentController {
     public List<Content> findAll(){
         return repository.findAll();
     }
+
+    //
+
+
 
 
 
