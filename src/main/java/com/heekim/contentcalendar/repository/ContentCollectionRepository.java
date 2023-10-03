@@ -18,22 +18,26 @@ import static com.heekim.contentcalendar.model.Type.ARTICLE;
 @Repository
 public class  ContentCollectionRepository {
     //??why is this private and others public
-    private final List<Content> content = new ArrayList<>();
+    private final List<Content> contentList = new ArrayList<>();
 
     public ContentCollectionRepository(){
 
     }
 
     public List<Content> findAll(){
-        return content;
+        return contentList;
     }
 
     //1:01.01
     // ?? what exactly is optional type-what is old alterntive
     //??Stream filter
     public Optional<Content> findById(Integer id){
-        return content.stream().filter(c -> c.equals(id)).findFirst();
+        return contentList.stream().filter(c -> c.equals(id)).findFirst();
 
+    }
+
+    public void save(Content content) {
+        contentList.add(content);
     }
 
     //post-construct -after dependency injection to do any "initialisation"
@@ -49,9 +53,8 @@ public class  ContentCollectionRepository {
                 null,
                 "http://www.myspring-blog.com");
 
-        content.add(c);
+        contentList.add(c);
     }
-
 
 
 }
