@@ -4,9 +4,12 @@ package com.heekim.contentcalendar.controller;
 import com.heekim.contentcalendar.model.Content;
 import com.heekim.contentcalendar.repository.ContentCollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,7 +18,6 @@ import java.util.List;
 //gk:but seems we make it in repository first
 @RestController
 @RequestMapping("/api/content")
-
 public class ContentController {
 
     private final ContentCollectionRepository repository;
@@ -32,20 +34,25 @@ public class ContentController {
     }*/
 
     //step3.An easier way is to use final for line 13  and then intellij suggestion-"add parameter constructor"
-    @Autowired //this is not needed if you have just 1 public constructor as in this case-but lets leave it
-    //it means there in an injection(autowired) of bean
+    @Autowired
+    //this is not needed if you have just 1 public constructor as in this case-but lets leave it-it means there in an injection(autowired) of bean
     public ContentController(ContentCollectionRepository repository) {
         this.repository = repository;
     }
     //1:08.08
     @GetMapping("") //this is a @RequestMapping under hood-a subset
     public List<Content> findAll(){
+
         return repository.findAll();
     }
 
     //
-
-
+    //@GetMapping("/1"); @GetMapping("/1"); @GetMapping("/1");@GetMapping("/1");@GetMapping("/1");
+    @GetMapping("/{id}")
+    public Content findById(@PathVariable Integer id){
+        return repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!" ));
+    }
 
 
 
