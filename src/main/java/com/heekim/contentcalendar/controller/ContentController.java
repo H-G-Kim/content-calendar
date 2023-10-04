@@ -43,18 +43,38 @@ public class ContentController {
         return repository.findAll();
     }
 
-    //
+    //??-Bug
     //@GetMapping("/1"); @GetMapping("/1"); @GetMapping("/1");@GetMapping("/1");@GetMapping("/1");
+    //??@PathVariable
     @GetMapping("/{id}")
     public Content findById(@PathVariable Integer id){
         return repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!" ));
     }
 
+    //?what is Content content mean for parameters
+    //@ResponseStatus gives the caller of the request to create a resource a indication the resouce actually created ->
+    //IT WILL GIVE A 201 response
+    @ResponseStatus(HttpStatus.CREATED)
+    //??why keep using same "" -isn't this confusing
     @PostMapping("")
-    public void Save(Content content){
+    public void Create(@RequestBody Content content){
+
         repository.save(content);
- }
+    }
+
+    @PutMapping
+    public void Update(Content content, @PathVariable Integer id){
+
+        if(!repository.idExists(id)){
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!" );
+        }
+
+        repository.save(content);
+    }
+
+
+
 
 
 

@@ -1,0 +1,46 @@
+
+###In console
+http :8080
+
+###download httpie
+###sudo snap install http    # version 2.4.0, or
+###sudo snap install httpie  # version 3.2.2
+###sudo apt  install httpie  # version 3.2.1-1
+
+###find all
+GET http://localhost:8080/api/content
+
+###Get content by id
+GET http://localhost:8080/api/content/1
+
+###Create content  ?? what is Content-Type: Appica....
+POST http://localhost:8080/api/content
+Content-Type: Application/json
+
+{
+"id":2,
+"title":"My second blog post",
+"desc":"My second-About blog post re. spring",
+"status":"IDEA",
+"contentType":"ARTICLE","
+dataCreated":"2023-10-04T18:57:26.363113628",
+"dateUpdate":null,
+"url":"http://www.myspring-blog.com"
+}
+
+###Update existing content  ?? what is Content-Type: Appica....
+###https://httpie.io/docs/cli/non-string-json-fields
+PUT http://localhost:8080/api/content/1
+Content-Type: Application/json
+
+{
+"id":1,
+"title":"My FIRST blog post!!!",
+"desc":"My second-About blog post re. spring",
+"status":"IDEA",
+"contentType":"ARTICLE","
+dataCreated":"2023-10-04T18:57:26.363113628",
+"dateUpdate":"2023-10-07T21:57:26.363113628",
+"url":"localhost:8080/my-first-spring-blog-post"
+}
+
