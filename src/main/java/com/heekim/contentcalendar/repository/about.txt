@@ -1,0 +1,12 @@
+
+
+
+
+1.31
+ make delete method in ContentController.java
+ -utilise id and the path variable
+ -use @deleteMapping
+
+1.33
+  -post id:2 using postman
+  -test delete using postman

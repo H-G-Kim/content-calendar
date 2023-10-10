@@ -30,7 +30,7 @@ public class  ContentCollectionRepository {
 
     //1:01.01
     // ?? what exactly is optional type-what is old alternative or alternative if any?
-    //??Stream filter  ??c -> c.id().equals(id) ?? is this an anonymous fx
+    //??Stream filter  ?HOW TO KNOW WHEN TO USE ??c -> c.id().equals(id) ?? is this an anonymous fx
     //?c.id() how can this be a method?
     public Optional<Content> findById(Integer id){
         return contentList.stream().filter(c -> c.id().equals(id)).findFirst();
@@ -38,6 +38,7 @@ public class  ContentCollectionRepository {
     }
 
     //??Predicate
+    //where is content coming from
     public void save(Content content) {
         contentList.removeIf(c -> c.id().equals(content.id()));
         contentList.add(content);
@@ -66,5 +67,9 @@ public class  ContentCollectionRepository {
 
     public boolean idExists(Integer id) {
         return contentList.stream().filter(c -> c.id().equals(id)).count() == 1;
+    }
+
+    public void delete(Integer id) {
+         contentList.removeIf(c -> c.id().equals(id));
     }
 }

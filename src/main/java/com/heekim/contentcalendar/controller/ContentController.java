@@ -52,26 +52,38 @@ public class ContentController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!" ));
     }
 
+    //Post is confusing
     //?what is Content content mean for parameters
-    //@ResponseStatus gives the caller of the request to create a resource a indication the resouce actually created ->
+    //@RequestBody -what does this do?
+    //@ResponseStatus gives the caller of the request to create a resource
+    // a indication the resource actually created ->
     //IT WILL GIVE A 201 response
     @ResponseStatus(HttpStatus.CREATED)
     //??why keep using same "" -isn't this confusing
     @PostMapping("")
-    public void Create(@RequestBody Content content){
+    public void create(@RequestBody Content content){
 
         repository.save(content);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT) //status 200 but -we're are not sending back new info
     @PutMapping
-    public void Update(Content content, @PathVariable Integer id){
+    public void update(Content content, @PathVariable Integer id){
 
         if(!repository.idExists(id)){
-            new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!" );
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found!" );
         }
 
         repository.save(content);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT) //status 200 but -we're are not sending back new info
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id){
+        repository.delete(id);
+    }
+
+
 
 
 
